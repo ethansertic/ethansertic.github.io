@@ -1,0 +1,7 @@
+---
+title: "Sports Data Is Awesome"
+author: "Ethan Sertic"
+date: 2021-03-11
+---
+So far, I am enjoying the Sports Data Analysis and Visualization class a lot! I've always been keen into looking at sports statistics for different teams and players, but I never knew how to use different codes to make data and charts for sports statistics. It's been a class that I think will be so helpful and useful for me while pursuing a job in the sports field. Continuing to use and learn R studio could be a major benefit to help me get a job. It's also fun to learn all these new methods of codes in order to get the data that I need. I'm excited to see what I will be learning the rest of the semester in the class! 
+
