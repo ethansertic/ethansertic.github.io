@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.81.0" />
+
+
+<title>Bad Football Fix Result Column - Ethan Sertic&#39;s Github Site</title>
+<meta property="og:title" content="Bad Football Fix Result Column - Ethan Sertic&#39;s Github Site">
+
+
+  <link href='http://ethansertic.github.io/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/ethansertic">GitHub</a></li>
+    
+    <li><a href="https://linkedin.com/in/ethan-sertic-6293931b8">Linkedin</a></li>
+    
+    <li><a href="https://twitter.com/ethan_sertic">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Bad Football Fix Result Column</h1>
+
+    
+    <span class="article-date">2021-03-29</span>
+    
+
+    <div class="article-content">
+      
+<script src="http://ethansertic.github.io/2021/03/29/bad-football-fix-result-column/index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>I am going to write a blog post about the text cleaning assignment that I just finished.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+## ✓ tibble  3.0.5     ✓ dplyr   1.0.3
+## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>badfootball &lt;- read_csv(&quot;badfootballlogs19.csv&quot;)</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   Date = col_character(),
+##   HomeAway = col_character(),
+##   Opponent = col_character(),
+##   Result = col_character(),
+##   TeamFull = col_character(),
+##   TeamURL = col_character(),
+##   Team = col_character(),
+##   Conference = col_character()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>badfootball %&gt;% separate(Result, into=c(&quot;Outcome&quot;, &quot;Score&quot;), sep=&quot;\\(&quot;) %&gt;% mutate(Score=gsub(&quot;)&quot;, &quot;&quot;, Score)) %&gt;% separate(Score, into=c(&quot;TeamScore&quot;, &quot;OpponentScore&quot;), sep=&quot;-&quot;) %&gt;% head()</code></pre>
+<pre><code>## # A tibble: 6 x 53
+##    Game Date  HomeAway Opponent Outcome TeamScore OpponentScore PassingCmp
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;              &lt;dbl&gt;
+## 1     1 8/24… N        Miami (… &quot;W &quot;    24        20                    17
+## 2     2 9/7/… &lt;NA&gt;     Tenness… &quot;W &quot;    45        0                     30
+## 3     3 9/14… @        Kentucky &quot;W &quot;    29        21                    21
+## 4     4 9/21… &lt;NA&gt;     Tenness… &quot;W &quot;    34        3                     24
+## 5     5 9/28… &lt;NA&gt;     Towson   &quot;W &quot;    38        0                     24
+## 6     6 10/5… &lt;NA&gt;     Auburn   &quot;W &quot;    24        13                    25
+## # … with 45 more variables: PassingAtt &lt;dbl&gt;, PassingPct &lt;dbl&gt;,
+## #   PassingYds &lt;dbl&gt;, PassingTD &lt;dbl&gt;, RushingAtt &lt;dbl&gt;, RushingYds &lt;dbl&gt;,
+## #   RushingAvg &lt;dbl&gt;, RushingTD &lt;dbl&gt;, OffensivePlays &lt;dbl&gt;,
+## #   OffensiveYards &lt;dbl&gt;, OffenseAvg &lt;dbl&gt;, FirstDownPass &lt;dbl&gt;,
+## #   FirstDownRush &lt;dbl&gt;, FirstDownPen &lt;dbl&gt;, FirstDownTotal &lt;dbl&gt;,
+## #   Penalties &lt;dbl&gt;, PenaltyYds &lt;dbl&gt;, Fumbles &lt;dbl&gt;, Interceptions &lt;dbl&gt;,
+## #   TotalTurnovers &lt;dbl&gt;, TeamFull &lt;chr&gt;, TeamURL &lt;chr&gt;, DefPassingCmp &lt;dbl&gt;,
+## #   DefPassingAtt &lt;dbl&gt;, DefPassingPct &lt;dbl&gt;, DefPassingYds &lt;dbl&gt;,
+## #   DefPassingTD &lt;dbl&gt;, DefRushingAtt &lt;dbl&gt;, DefRushingYds &lt;dbl&gt;,
+## #   DefRushingAvg &lt;dbl&gt;, DefRushingTD &lt;dbl&gt;, DefPlays &lt;dbl&gt;, DefYards &lt;dbl&gt;,
+## #   DefAvg &lt;dbl&gt;, DefFirstDownPass &lt;dbl&gt;, DefFirstDownRush &lt;dbl&gt;,
+## #   DefFirstDownPen &lt;dbl&gt;, DefFirstDownTotal &lt;dbl&gt;, DefPenalties &lt;dbl&gt;,
+## #   DefPenaltyYds &lt;dbl&gt;, DefFumbles &lt;dbl&gt;, DefInterceptions &lt;dbl&gt;,
+## #   DefTotalTurnovers &lt;dbl&gt;, Team &lt;chr&gt;, Conference &lt;chr&gt;</code></pre>
+<p>In order to fix the Result column for this assignment, there were numerous steps I had to do. I first had to separate result into different columns with Outcome and Score. Then I used \(“) in order to get the score separate from the result and into the two different columns. Then I used mutate and gsub in order to remove and to get the parentheses out of the score. Then I had to use separate again for the score. I put the score into two different columns with the TeamScore for how much the team scored and OpponentScore for how much the opposing team scored. Then I used a dash mark”-" to help separate the score. I also used head() at the end in order to only show a small sample size.</p>
+<pre class="r"><code>worstgames &lt;- badfootball %&gt;% separate(Result, into=c(&quot;Outcome&quot;, &quot;Score&quot;), sep=&quot;\\(&quot;) %&gt;% mutate(Score=gsub(&quot;)&quot;, &quot;&quot;, Score)) %&gt;% separate(Score, into=c(&quot;TeamScore&quot;, &quot;OpponentScore&quot;), sep=&quot;-&quot;) %&gt;% mutate(TeamScore = as.numeric(TeamScore), OpponentScore = as.numeric(OpponentScore)) %&gt;% mutate(Differential = TeamScore-OpponentScore) %&gt;% filter(Differential &gt; 65)</code></pre>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
