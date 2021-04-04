@@ -6,16 +6,25 @@
     <description>Recent content in R on Ethan Sertic&#39;s Github Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Dec 2020 21:13:14 -0500</lastBuildDate><atom:link href="http://ethansertic.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://ethansertic.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hello R Markdown</title>
-      <link>http://ethansertic.github.io/2020/12/01/hello-r-markdown/</link>
-      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <title>Who is the worst team to win a national title in college basketball since the NCAA introduced the 3-point line for the 1986-87 season?</title>
+      <link>http://ethansertic.github.io/2021/04/01/who-is-the-worst-team-to-win-a-national-title-in-college-basketball-since-the-ncaa-introduced-the-3-point-line-for-the-1986-87-season/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://ethansertic.github.io/2020/12/01/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.</description>
+      <guid>http://ethansertic.github.io/2021/04/01/who-is-the-worst-team-to-win-a-national-title-in-college-basketball-since-the-ncaa-introduced-the-3-point-line-for-the-1986-87-season/</guid>
+      <description>It’s one of the best sporting events every year. The NCAA Tournament and March Madness is amazing for many sports fans. New moments, iconic games, and legacies are created every year during March Madness. There have been many different schools to win a national title in college basketball and every school has the chance to be a champion.
+The die-hard college basketball fans and media always like to compare who is the greatest college basketball national champion ever.</description>
+    </item>
+    
+    <item>
+      <title>Bad Football Fix Result Column</title>
+      <link>http://ethansertic.github.io/2021/03/29/bad-football-fix-result-column/</link>
+      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ethansertic.github.io/2021/03/29/bad-football-fix-result-column/</guid>
+      <description>I am going to write a blog post about the text cleaning assignment that I just finished.
+library(tidyverse) ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ── ## ✓ ggplot2 3.3.3 ✓ purrr 0.3.4 ## ✓ tibble 3.0.5 ✓ dplyr 1.0.3 ## ✓ tidyr 1.1.2 ✓ stringr 1.4.0 ## ✓ readr 1.4.0 ✓ forcats 0.5.0 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ── ## x dplyr::filter() masks stats::filter() ## x dplyr::lag() masks stats::lag() badfootball &amp;lt;- read_csv(&amp;quot;badfootballlogs19.</description>
     </item>
     
   </channel>
