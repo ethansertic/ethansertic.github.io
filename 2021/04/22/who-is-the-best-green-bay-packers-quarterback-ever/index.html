@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.81.0" />
+
+
+<title>Who is the best Green Bay Packers quarterback ever?  - Ethan Sertic&#39;s Github Site</title>
+<meta property="og:title" content="Who is the best Green Bay Packers quarterback ever?  - Ethan Sertic&#39;s Github Site">
+
+
+  <link href='http://ethansertic.github.io/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/ethansertic">GitHub</a></li>
+    
+    <li><a href="https://linkedin.com/in/ethan-sertic-6293931b8">Linkedin</a></li>
+    
+    <li><a href="https://twitter.com/ethan_sertic">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">14 min read</span>
+    
+
+    <h1 class="article-title">Who is the best Green Bay Packers quarterback ever? </h1>
+
+    
+    <span class="article-date">2021-04-22</span>
+    
+
+    <div class="article-content">
+      
+<script src="http://ethansertic.github.io/2021/04/22/who-is-the-best-green-bay-packers-quarterback-ever/index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>With growing up in Wisconsin my whole life, the Green Bay Packers are one of my favorite sports team. I appreciate the history and tradition of the proud franchise that I’ve always supported. It has also helped that the franchise has had a lot of winning seasons and is contending for the Super Bowl almost every year because of the quarterbacks.</p>
+<p>Since it’s almost time for the NFL draft this year and the Packers potentially drafted their future quarterback in Jordan Love last year, I decided to take a look at the three Super Bowl winning quarterbacks in franchise history. Bart Starr was the leader of the Packers during the Vince Lombardi era, and helped the Packers win the first two Super Bowls in the mid-1960s. There were a couple bad decades of Packers football after Starr retired. Finally, in 1992 the team traded for a young gunslinger in Brett Favre who would lead the Packers to glory again. Near the end of Favre’s Packers career, he contemplated retiring almost every year. In 2005, with projected first overall pick Aaron Rodgers dropping down in the draft, the Packers decided to draft him later in the first round. Rodgers would continue the Packers success and tradition with many more winning teams. Since every Packers fan talks about the greatness of these three quarterbacks in Packers history, it begs the question: Who is the best Green Bay Packers quarterback ever?</p>
+<p>Let’s take a look at some numbers.</p>
+<pre class="r"><code>library(tidyverse)
+library(ggalt)
+library(kableExtra)
+library(gt)
+library(ggrepel)
+PackersQBs &lt;- read_csv(&quot;PackersQBsData.csv&quot;)</code></pre>
+<p>The data set I’ll be working with are career statistics for each of the quarterbacks during their Green Bay Packers career from the Pro Football Reference site. Brett Favre is the only quarterback out of the three who has played for another team so far in his career so I couldn’t include his stats with the Falcons, Jets, and Vikings. I will be relying on some regular season stats from the quarterbacks including passing yards, rushing yards, game-winning drives, and 4th quarter comebacks. I’ll also be seeing how many touchdowns and interceptions the quarterbacks have thrown in the playoffs.</p>
+<p>First, I’m going to create a table that shows the quarterbacks with their career accomplishments. This includes their regular season record, MVPs, Pro Bowls, All-Pro seasons, playoff record, Super Bowl wins, and Super Bowl MVPs.</p>
+<pre class="r"><code>PackersQBAccomplishments &lt;- PackersQBs %&gt;%
+  arrange(RegularSeasonRecord) %&gt;%
+  select(Player, RegularSeasonRecord, MVPs, ProBowls, `All-Pros`, PlayoffRecord, SuperBowlWins, SuperBowlMVPS)</code></pre>
+<p>I’m interested in seeing how the quarterbacks compare to each other in their history. I’m going to select all the accomplishments that I talked about, but I’m going to arrange the quarterbacks based on who had the best regular season record.</p>
+<p>With this table, I’ll be able to see if there was a huge difference between how the quarterbacks played in the regular season compared to the playoffs.</p>
+<pre class="r"><code>PackersQBAccomplishments %&gt;% 
+  gt() %&gt;% 
+  tab_header(
+    title = &quot;The Packers Quarterbacks Accomplishments&quot;,
+    subtitle = &quot;Aaron Rodgers and Brett Favre are much more accomplished in the Regular Season, but Bart Starr has the best Playoff Record and most Super Bowl wins.&quot;) %&gt;% 
+  tab_style(
+    style = cell_text(color = &quot;black&quot;, weight = &quot;bold&quot;, align = &quot;left&quot;),
+    locations = cells_title(&quot;title&quot;)) %&gt;% 
+  tab_style(
+    style = cell_text(color = &quot;black&quot;, align = &quot;left&quot;),
+    locations = cells_title(&quot;subtitle&quot;)) %&gt;%
+  tab_source_note(
+    source_note = &quot;By Ethan Sertic&quot;) %&gt;%
+  tab_source_note(
+    source_note = md(&quot;Source: [Pro Football Reference](https://www.pro-football-reference.com/teams/gnb/career-passing.htm)&quot;)) %&gt;% tab_style(
+    style = cell_text(color = &quot;black&quot;, weight = &quot;bold&quot;),
+    locations = cells_body(
+      columns = vars(Player))) %&gt;% 
+  opt_row_striping() %&gt;% 
+  opt_table_lines(&quot;none&quot;) %&gt;% 
+  tab_style(
+    style = cell_borders(sides = c(&quot;top&quot;, &quot;bottom&quot;), 
+                         color = &quot;grey&quot;, weight = px(1)),
+    locations = cells_column_labels(everything())) %&gt;% 
+  tab_style(
+    style = list(
+      cell_fill(color = &quot;#203731&quot;),
+      cell_text(color = &quot;#FFB612&quot;)),
+    locations = cells_body(
+      rows = Player == &quot;Aaron Rodgers&quot;)) %&gt;%
+  tab_style(
+    style = list(
+      cell_fill(color = &quot;#FFB612&quot;),
+      cell_text(color = &quot;#203731&quot;)),
+    locations = cells_body(
+      rows = Player == &quot;Brett Favre&quot;)) %&gt;%
+  tab_style(
+    style = list(
+      cell_fill(color = &quot;#203731&quot;),
+      cell_text(color = &quot;white&quot;)),
+    locations = cells_body(
+      rows = Player == &quot;Bart Starr&quot;)) </code></pre>
+<pre><code>## Warning: The `.dots` argument of `group_by()` is deprecated as of dplyr 1.0.0.</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#hohpocagba .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: none;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hohpocagba .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hohpocagba .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hohpocagba .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hohpocagba .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hohpocagba .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hohpocagba .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hohpocagba .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hohpocagba .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hohpocagba .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hohpocagba .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hohpocagba .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hohpocagba .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hohpocagba .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hohpocagba .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hohpocagba .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hohpocagba .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#hohpocagba .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hohpocagba .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#hohpocagba .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hohpocagba .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: none;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hohpocagba .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hohpocagba .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hohpocagba .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hohpocagba .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hohpocagba .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hohpocagba .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hohpocagba .gt_left {
+  text-align: left;
+}
+
+#hohpocagba .gt_center {
+  text-align: center;
+}
+
+#hohpocagba .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hohpocagba .gt_font_normal {
+  font-weight: normal;
+}
+
+#hohpocagba .gt_font_bold {
+  font-weight: bold;
+}
+
+#hohpocagba .gt_font_italic {
+  font-style: italic;
+}
+
+#hohpocagba .gt_super {
+  font-size: 65%;
+}
+
+#hohpocagba .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="hohpocagba" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="8" class="gt_heading gt_title gt_font_normal" style="color: black; text-align: left; font-weight: bold;">The Packers Quarterbacks Accomplishments</th>
+    </tr>
+    <tr>
+      <th colspan="8" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: black; text-align: left;">Aaron Rodgers and Brett Favre are much more accomplished in the Regular Season, but Bart Starr has the best Playoff Record and most Super Bowl wins.</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">Player</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">RegularSeasonRecord</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">MVPs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">ProBowls</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">All-Pros</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">PlayoffRecord</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">SuperBowlWins</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: grey; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">SuperBowlMVPS</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left" style="color: #FFB612; font-weight: bold; background-color: #203731;">Aaron Rodgers</td>
+      <td class="gt_row gt_left" style="background-color: #203731; color: #FFB612;">126-63-1</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: #FFB612;">3</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: #FFB612;">9</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: #FFB612;">3</td>
+      <td class="gt_row gt_left" style="background-color: #203731; color: #FFB612;">11-9</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: #FFB612;">1</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: #FFB612;">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left gt_striped" style="color: #203731; font-weight: bold; background-color: #FFB612;">Brett Favre</td>
+      <td class="gt_row gt_left gt_striped" style="background-color: #FFB612; color: #203731;">160-93</td>
+      <td class="gt_row gt_right gt_striped" style="background-color: #FFB612; color: #203731;">3</td>
+      <td class="gt_row gt_right gt_striped" style="background-color: #FFB612; color: #203731;">11</td>
+      <td class="gt_row gt_right gt_striped" style="background-color: #FFB612; color: #203731;">3</td>
+      <td class="gt_row gt_left gt_striped" style="background-color: #FFB612; color: #203731;">12-10</td>
+      <td class="gt_row gt_right gt_striped" style="background-color: #FFB612; color: #203731;">1</td>
+      <td class="gt_row gt_right gt_striped" style="background-color: #FFB612; color: #203731;">0</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="color: white; font-weight: bold; background-color: #203731;">Bart Starr</td>
+      <td class="gt_row gt_left" style="background-color: #203731; color: white;">94-57-6</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: white;">1</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: white;">4</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: white;">1</td>
+      <td class="gt_row gt_left" style="background-color: #203731; color: white;">9-1</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: white;">2</td>
+      <td class="gt_row gt_right" style="background-color: #203731; color: white;">2</td>
+    </tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="8">By Ethan Sertic</td>
+    </tr>
+    <tr>
+      <td class="gt_sourcenote" colspan="8">Source: <a href="https://www.pro-football-reference.com/teams/gnb/career-passing.htm">Pro Football Reference</a></td>
+    </tr>
+  </tfoot>
+  
+</table></div>
+<p>Aaron Rodgers has the best winning percentage in the regular season so far and it could continue to improve if he keeps playing with the Packers. Rodgers and Favre have very similar career accomplishments. They each have won 3 MVPs, 3 All-Pro seasons, and won one Super Bowl. Favre has two more Pro Bowls while Rodgers won a Super Bowl MVP during his Super Bowl win. Their playoff records are very close at 11-9 and 12-10 for Rodgers and Favre respectively. Bart Starr has significantly less MVPs, All-Pros, and Pro Bowls seasons. His playoff resume stands out though with a playoff record of 9-1, two Super Bowl wins, and winning the MVP in both of those Super Bowls. We could say that Starr produces the best in the biggest games. He is more accomplished in the stat that matters the most to every quarterback and that is Super Bowl wins. Starr had a lot hall of fame talent and one of the greatest football coaches ever around him, but he still had to be great too in order to win games.</p>
+<p>Let’s see how each quarterback did with their regular season stats. I’m going to group the players and summarize their rushing yards and passing yards and name them as Packers Rushing Yards and Packers Passing Yards to see if there was a significant stat advantage with the yards. With all three quarterbacks playing in a different era of football, I want to know if passing yards were inflated for Favre and Rodgers. With Rodgers playing in an era where quarterbacks need to get out of the pocket and extend plays, does Rodgers have a significant amount more of rushing yards than Favre and Starr. Does Rodgers have a chance to catch up to Favre in passing yards or total yards as a Packer? This stacked bar chart will answer those questions.</p>
+<pre class="r"><code>PackersQBYards &lt;- PackersQBs %&gt;% 
+  group_by(Player) %&gt;%
+  summarise(
+    PackersRushingYards = sum(RushingYards),
+    PackersPassingYards = sum(PassingYards)
+    )</code></pre>
+<pre class="r"><code>PackersQBYardsWide &lt;- PackersQBYards %&gt;%  
+  pivot_longer(
+    cols=starts_with(&quot;Packers&quot;), 
+    names_to=&quot;Type&quot;, 
+    values_to=&quot;Yards&quot;)</code></pre>
+<pre class="r"><code>ggplot(PackersQBYardsWide, aes(x=reorder(Player, Yards), weight=Yards, fill=Type)) + 
+  geom_bar() + 
+  coord_flip() +
+  labs(
+    title=&quot;How did each quarterback perform in the regular season with passing and rushing yards? &quot;, 
+    subtitle=&quot;Brett Favre has a significant lead in total yards, but Rodgers has more years left to challenge Favre.&quot;,            
+    caption=&quot;Source: Pro Football Reference | By Ethan Sertic&quot;, 
+    x=&quot;Player&quot;, y=&quot;Yards&quot;) + 
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 10, face = &quot;bold&quot;),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=9),  
+    panel.grid.minor = element_blank()
+    )</code></pre>
+<p><img src="http://ethansertic.github.io/2021/04/22/who-is-the-best-green-bay-packers-quarterback-ever/index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Aaron Rodgers has a considerable lead in rushing yards ahead of the other two quarterbacks. You would think that since it seems like Rodgers is much more mobile compared to Starr and Favre that he would have even more rushing yards. The stacked bar chart shows that all three quarterbacks could move a little bit, but were far superior pocket passers. Favre still has a big margin in passing yards ahead of Rodgers. Rodgers could catch up to Favre in passing yards, but he would have to most likely stay as a Packer the rest of his career and continue to play like one of the best quarterbacks in the league through his age-40 seasons.</p>
+<pre class="r"><code>PackersQBsClutch &lt;- PackersQBs %&gt;%
+  group_by(Player) %&gt;%
+  summarise(
+   Packers4thQuarterComebacks = sum(`4thQuarterComebacks`),
+   PackersGameWinningDrives = sum(GameWinningDrives))</code></pre>
+<p>I wanted to know how each quarterback performed in clutch situations. First, I summarized what each quarterback had for their 4th quarter comebacks when they were trailing late in the game. I also looked at how many game-winning drives they had when they were trailing or tied near the end of a game on a final drive. I am going to use a dumbbell plot in order to show the comparison of the clutch stats for the quarterbacks.</p>
+<pre class="r"><code>ggplot() + 
+  geom_dumbbell(
+    data=PackersQBsClutch, 
+    aes(y=Player, x=PackersGameWinningDrives, xend=Packers4thQuarterComebacks),
+    size = 3,
+    color = &quot;grey&quot;,
+    colour_x = &quot;#203731&quot;,
+    colour_xend = &quot;#FFB612&quot;) + 
+  labs(
+    title=&quot;The clutch factor for Brett Favre sets him apart&quot;, 
+    subtitle=&quot;The yellow dot means 4th quarter comebacks and the green dot means game-winning drives.&quot;,              
+    caption=&quot;Source: Pro Football Reference | By Ethan Sertic&quot;, 
+    x=&quot;Packers Game Winning Drives&quot;, y=&quot;Player&quot;) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = &quot;bold&quot;),
+    axis.title = element_text(size = 9), 
+    plot.subtitle = element_text(size=10),  
+    panel.grid.minor = element_blank()
+    )  </code></pre>
+<p><img src="http://ethansertic.github.io/2021/04/22/who-is-the-best-green-bay-packers-quarterback-ever/index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+The yellow dot for the dumbbell plot shows how many 4th quarter comebacks each QB had, while the green dot showed how many game-winning drives they each had. The plot shows that Brett Favre is the most clutch quarterback in Packers history. He has the most 4th quarter comebacks and game-winning drives by a wide margin compared to the other two quarterbacks. It can also be questioned if Starr and Rodgers have led their Packers teams to more leads late in the game as they haven’t gotten as many of the comebacks and game-winning drives. This plot looks great in favor of Favre if you were to pick which one of these three quarterbacks you want with the game on the line and not much time left.</p>
+<pre class="r"><code>PackersQBPlayoffs &lt;- PackersQBs %&gt;%
+  group_by(Player) %&gt;%
+  summarise(
+    PackersPlayoffTDs= sum(PlayoffPassingTDs), 
+    PackersPlayoffINTs = sum(PlayoffPassingINTs)) </code></pre>
+<p>The last thing I wanted to check was some postseason stats to compare the quarterbacks in the biggest games of their careers. As we saw in the accomplishments table, Starr was superior in those playoff accomplishments, but I want to see how he did with his stats individually. With how great these quarterbacks are and how many times they’ve made the postseason, you would think that they should have more Super Bowl titles. This scatterplot will show how they helped their teams with scoring and if turnovers cost them during their playoff games. I also need to use filter in order to get each player on the scatterplot with their own color on the plot.</p>
+<pre class="r"><code>BartStarr &lt;- PackersQBPlayoffs %&gt;% 
+  filter(Player == &quot;Bart Starr&quot;)
+BrettFavre &lt;- PackersQBPlayoffs %&gt;% 
+  filter(Player == &quot;Brett Favre&quot;)
+AaronRodgers &lt;- PackersQBPlayoffs %&gt;% 
+  filter(Player == &quot;Aaron Rodgers&quot;)</code></pre>
+<pre class="r"><code>PackersQBPlayoffs %&gt;% 
+  ungroup() %&gt;% 
+  summarise(
+    TDs = mean(PackersPlayoffTDs), 
+    INTs = mean(PackersPlayoffINTs)
+    )</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##     TDs  INTs
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1    33  14.7</code></pre>
+<p>I decided in order to make the scatterplot look better, I had to calculate what were the average touchdowns and interceptions the quarterbacks threw in the playoffs. By finding out the averages, I could use these numbers to determine where each quarterback was located on the scatterplot. The numbers would become lines on the scatterplots that divided the scatterplot into four different parts.</p>
+<pre class="r"><code>ggplot() + 
+  geom_point(data=PackersQBPlayoffs, aes(x=PackersPlayoffTDs, y=PackersPlayoffINTs)) + 
+  geom_point(data=BartStarr, aes(x=PackersPlayoffTDs, y=PackersPlayoffINTs), color=&quot;dark grey&quot;) +
+  geom_point(data=BrettFavre, aes(x=PackersPlayoffTDs, y=PackersPlayoffINTs), color=&quot;#FFB612&quot;) +
+  geom_point(data=AaronRodgers, aes(x=PackersPlayoffTDs, y=PackersPlayoffINTs), color=&quot;#203731&quot;) +
+  geom_vline(xintercept = 33, color=&quot;red&quot;) + 
+  geom_hline(yintercept = 14.66667, color=&quot;red&quot;) +
+  geom_text(aes(x=40, y=7.5, label=&quot;High Touchdowns, Low Interceptions&quot;), color=&quot;blue&quot;) +
+  geom_text(aes(x=40, y=22.5, label=&quot;High Touchdowns, High Interceptions&quot;), color=&quot;blue&quot;) +
+  geom_text(aes(x=22.5, y=7.5, label=&quot;Low Touchdowns, Low Inteceptions&quot;), color=&quot;blue&quot;) +
+   labs(
+    title=&quot;Did the playoffs affect the greatness of the quarterbacks?&quot;, 
+    subtitle=&quot;Starr and Rodgers both have good TD-INTs ratios, but Starr has one more Super Bowl win.&quot;,        
+    caption=&quot;Source: Pro Football Reference | By Ethan Sertic&quot;, 
+    x=&quot;Packers Playoff TDs&quot;, y=&quot;Packers Playoff INTs&quot;) +
+  geom_text(aes(x=43.8, y=12, label=&quot;Aaron Rodgers&quot;)) +
+  geom_text(aes(x=15.25, y=4.25, label=&quot;Bart Starr&quot;)) +
+  geom_text(aes(x=39, y=26.5, label=&quot;Brett Favre&quot;)) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = &quot;bold&quot;),
+    axis.title = element_text(size = 9), 
+    plot.subtitle = element_text(size=10),  
+    panel.grid.minor = element_blank()
+    )</code></pre>
+<p><img src="http://ethansertic.github.io/2021/04/22/who-is-the-best-green-bay-packers-quarterback-ever/index_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+The top right of the bubble chart where Brett Favre was located meant that he had a lot of playoff touchdown passes, but he also had a lot of playoff interceptions. Brett Favre had more than the 33 touchdown passes average and he also had more than the 14.667 interceptions average. Bart Starr had the the opposite of Brett Favre and was located in the bottom left of the scatterplot. He didn’t do much passing wise in his playoff games because he threw below the touchdown and interception averages by far. He only threw 15 playoff touchdowns, but he barely turned over the ball with only 3 interceptions. Aaron Rodgers was in the best category of the scatter plot on the bottom right as he had more than the 33 touchdown passes average and had less than the 14.667 interceptions average.</p>
+<p>This means Rodgers with his individual stats in the postseason, is more efficient and productive in the playoffs compared to Favre and Starr. The scatterplot shows that Aaron Rodgers is a underrated quarterback in the postseason. There will be some people who say he’s not good because he’s only made and won one Super Bowl, but it could be that he doesn’t get as much help from his team as Bart Starr got. Rodgers TD to INT ratio in the postseason is still outstanding which helps his case in being the best Packers quarterback ever.</p>
+<p>So who is the best Green Bay Packers quarterback ever? It’s still a tough choice to determine who it is. Rodgers and Favre are very similar in their stats except Rodgers doesn’t have as many passing yards as Favre, but Favre has way more turnovers. Starr still has the most Super Bowl wins which helps his case since he’s won the most important game twice. I think that Bart Starr is the most accomplished quarterback, but Aaron Rodgers is the most talented out of the three. If Rodgers were to get one more Super Bowl win in Green Bay, that would cement his legacy no doubt as the best Green Bay Packers quarterback ever.</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
